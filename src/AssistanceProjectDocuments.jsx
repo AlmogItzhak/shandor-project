@@ -16,7 +16,6 @@ export function AssistanceProjectDocuments() {
     navigate("/SubmitionPage");
   };
   const uploadImage = () => {
-    console.log(imageUpload.length);
     if (imageUpload == null) return;
     if (imageUpload.length < 14) {
       Swal.fire({
@@ -39,20 +38,20 @@ export function AssistanceProjectDocuments() {
   };
   return (
     <div className="allDocPage">
-      <div className="titleOfPage">
-        <h1>העלאת קבצים בפורמט JPG או PDF </h1>
+      <section className="banner">
+        <h1 id="difh1">העלאת קבצים בפורמט JPG או PDF</h1>
         <br />
-        <h5>
-          לאחר לחיצה על כפתור הגש יש להמתין מספר רגעים עד לקבלת הודעת שהקבצים
-          הועלו בהצלחה{" "}
-        </h5>
-      </div>
+        <p>
+          לאחר לחיצה על כפתור הגש יש להמתין מספר רגעים עד לקבלת הודעה שהקבצים
+          הועלו בהצלחה
+        </p>
+      </section>
       <br></br>
       <div className="box">
         <div className="generalDocuments">
           <h3>מסמכים אישיים:</h3>
           <br></br>
-          <label for="file"> צילום ת"ז וספח </label>
+          <label htmlFor="file"> צילום ת"ז וספח </label>
           <div>
             <input
               type="file"
@@ -63,7 +62,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> מכתב בקשה מהפונה הכולל רקע אישי </label>
+          <label htmlFor="file"> מכתב בקשה מהפונה הכולל רקע אישי </label>
           <div>
             <input
               type="file"
@@ -74,7 +73,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file">
+          <label htmlFor="file">
             {" "}
             תעודת שחרור משירות צבאי/לאומי או תעודת פטור משירות{" "}
           </label>
@@ -88,7 +87,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> גיליון ציונים </label>
+          <label htmlFor="file"> גיליון ציונים </label>
           <div>
             <input
               type="file"
@@ -99,7 +98,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> צילום רישיון רכב (במידה וקיים) </label>
+          <label htmlFor="file"> צילום רישיון רכב (במידה וקיים) </label>
           <div>
             <input
               type="file"
@@ -110,7 +109,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> צילום רישיון נשק (במידה וקיים) </label>
+          <label htmlFor="file"> צילום רישיון נשק (במידה וקיים) </label>
           <div>
             <input
               type="file"
@@ -121,7 +120,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> טופס ויתור סודיות </label>
+          <label htmlFor="file"> טופס ויתור סודיות </label>
           <div>
             <input
               type="file"
@@ -143,7 +142,7 @@ export function AssistanceProjectDocuments() {
         <div className="medicalDocuments">
           <h3>מסמכים רפואיים:</h3>
           <br />
-          <label for="file"> דוח סוציאלי מגורם מפנה </label>
+          <label htmlFor="file"> דוח סוציאלי מגורם מפנה </label>
           <div>
             <input
               type="file"
@@ -154,7 +153,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> אבחון לקויות למידה </label>
+          <label htmlFor="file"> אבחון לקויות למידה </label>
           <div>
             <input
               type="file"
@@ -165,7 +164,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> הערכה פסיכולוגית </label>
+          <label htmlFor="file"> הערכה פסיכולוגית </label>
           <div>
             <input
               type="file"
@@ -182,7 +181,7 @@ export function AssistanceProjectDocuments() {
         <div className="bankDocuments">
           <h3>טפסי בנק:</h3>
           <br />
-          <label for="file"> אישור ניהול חשבון בנק </label>
+          <label htmlFor="file"> אישור ניהול חשבון בנק </label>
           <div>
             <input
               type="file"
@@ -193,7 +192,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> תדפיסי חשבון בנק (3 חודשים) </label>
+          <label htmlFor="file"> תדפיסי חשבון בנק (3 חודשים) </label>
           <div>
             <input
               type="file"
@@ -204,7 +203,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> אישור על תשלום משכנתא/שכ"ד/חובות/אחר </label>
+          <label htmlFor="file"> אישור על תשלום משכנתא/שכ"ד/חובות/אחר </label>
           <div>
             <input
               type="file"
@@ -215,7 +214,7 @@ export function AssistanceProjectDocuments() {
             />
           </div>
           <br />
-          <label for="file"> אישורי הכנסות אחרות/קצבאות </label>
+          <label htmlFor="file"> אישורי הכנסות אחרות/קצבאות </label>
           <div>
             <input
               type="file"

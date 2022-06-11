@@ -11,8 +11,12 @@ import {
 import { db } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase";
-
+import $ from "jquery";
+import dateFormat, { masks } from "dateformat";
 export function AssistanceProject() {
+  $("body").on("click", "#scr3", function () {
+    navigate("/Login");
+  });
   const [user, loggedIn] = useAuthState(auth);
   const [formData, setFormData] = useState({
     fname: "",
@@ -41,12 +45,25 @@ export function AssistanceProject() {
     timestamp: "",
   });
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === "date_of_birth") {
+      let date = dateFormat(e.target.value, "dd/mm/yyyy");
+      setFormData({ ...formData, [e.target.name]: date });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  };
+  const handleSelecetChange = (e) => {
+    // if (e.target.value === false) {
+    //   e.target.value = true;
+    // }
+
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
   const navigate = useNavigate();
   function nav() {
     navigate("/Login");
   }
+
   const docPage = () => {
     const formRef = collection(db, "Candidates for habitant project");
     const uid = auth.currentUser.uid;
@@ -89,56 +106,102 @@ export function AssistanceProject() {
   if (!user) {
     return (
       <div className="loggedIn">
-        <div class="allThePage">
-          <div class="AllDetails">
+        <div className="allThePage">
+          <div className="AllDetails">
+            <section className="banner">
+              <h1 id="difh1">פרויקט דיור בוגרות</h1>
+              {/* <p>Company Mission Statement goes here</p> */}
+              <a id="scr3" className="btn-bgstroke">
+                להתחברות לחץ
+              </a>
+            </section>
             <br />
-            <div class="titleToAssistnceProject">
-              <h1>פרויקט הכוון </h1>
-            </div>
-            <br />
-            <div class="Details">
-              העמותה ע"ש אהרן שנדור מזמינה צעירים/ות המעוניינים/ות ללמוד
-              תואר/תעודה בראש שקט תוך כדי תרומה לקהילה.
-              <br />
-              <br />
-            </div>
+            <ul className="tilesWrap">
+              <li>
+                <h2>01</h2>
+                <p>פריסה ארצית ללא הגבלה גיאוגרפית</p>
+              </li>
+              <li>
+                <h2>02</h2>
+                <p>ליווי ועזרה בהתנהלות פיננסית של הצעירים/ות</p>
+              </li>
+              <li>
+                <h2>03</h2>
+                <p>עזרה במידת הצורך גם בדברים אישיים של הצעירים/ות</p>
+              </li>
+              <li>
+                <h2>04</h2>
+                <p>
+                  תמיכה וסיוע בהיבטים בירוקרטיים עם גורמי חוץ כמו מוסדות לימוד
+                  וכד'
+                </p>
+              </li>
+            </ul>
           </div>
           <br />
-          <button className="button-55" onClick={nav}>
-            להתחברות לחץ כאן
-          </button>
-
-          <div class="SubmitRequest"></div>
+          <div className="SubmitRequest"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div class="allThePage">
-      <div class="AllDetails">
+    <div className="allThePage">
+      <div className="AllDetails">
+        <section className="banner">
+          <h1 id="difh1">פרויקט הכוון</h1>
+          {/* <p>Company Mission Statement goes here</p> */}
+          <a href="#scr1" className="btn-bgstroke">
+            להרשמה לחץ
+          </a>
+        </section>
         <br />
-        <div class="titleToAssistnceProject">
-          <h1>פרויקט הכוון </h1>
-        </div>
-        <br />
-        <div class="Details">
-          העמותה ע"ש אהרן שנדור מזמינה צעירים/ות המעוניינים/ות ללמוד תואר/תעודה
-          בראש שקט תוך כדי תרומה לקהילה.
-          <br />
-          <br />
-        </div>
+        <ul className="tilesWrap">
+          <li>
+            <h2>01</h2>
+            <p>פריסה ארצית ללא הגבלה גיאוגרפית</p>
+          </li>
+          <li>
+            <h2>02</h2>
+            <p>ליווי ועזרה בהתנהלות פיננסית של הצעירים/ות</p>
+          </li>
+          <li>
+            <h2>03</h2>
+            <p>עזרה במידת הצורך גם בדברים אישיים של הצעירים/ות</p>
+          </li>
+          <li>
+            <h2>04</h2>
+            <p>
+              תמיכה וסיוע בהיבטים בירוקרטיים עם גורמי חוץ כמו מוסדות לימוד וכד'
+            </p>
+          </li>
+        </ul>
       </div>
-      <br />
-      <br />
-      <div class="SubmitRequest">
+      <section className="banner2">
+        {/* <p>Company Mission Statement goes here</p> */}
+        <a href="#private" className="btn-bgstroke1">
+          פרטים אישיים
+        </a>
+        <a href="#social" className="btn-bgstroke1">
+          גורם מפנה
+        </a>
+        <a href="#study" className="btn-bgstroke1">
+          לימודים
+        </a>
+        <a href="#general" className="btn-bgstroke1">
+          כללי
+        </a>
+      </section>
+      <div id="scr1" className="SubmitRequest">
         <br />
+        <br />
+        <form>
+          <fieldset>
+            <legend id="private" className="legendTitle">
+              פרטים אישיים
+            </legend>
 
-        <br />
-        <fieldset>
-          <legend class="legendTitle">פרטים אישיים</legend>
-          <form>
-            <label for="fname">שם פרטי : </label>
+            <label htmlFor="fname">שם פרטי : </label>
             <input
               className="input1"
               type="text"
@@ -148,7 +211,7 @@ export function AssistanceProject() {
               value={formData.fname}
               onChange={(e) => handleChange(e)}
             />
-            <label for="lname">שם משפחה : </label>
+            <label htmlFor="lname">שם משפחה : </label>
             <input
               className="input1"
               type="text"
@@ -158,7 +221,7 @@ export function AssistanceProject() {
               value={formData.lname}
               onChange={(e) => handleChange(e)}
             />
-            <label for="ID">תעודת זהות : </label>
+            <label htmlFor="ID">תעודת זהות : </label>
             <input
               className="input1"
               type="number"
@@ -168,13 +231,12 @@ export function AssistanceProject() {
               value={formData.ID}
               onChange={(e) => handleChange(e)}
             />
-            <label for="date_of_birth">תאריך לידה:</label>
+            <label htmlFor="date_of_birth">תאריך לידה:</label>
             <input
               className="input1"
-              type="text"
+              type="date"
               id="date_of_birth"
               name="date_of_birth"
-              placeholder="dd/mm/yyyy"
               required
               value={formData.date_of_birth}
               onChange={(e) => handleChange(e)}
@@ -182,7 +244,7 @@ export function AssistanceProject() {
             <br />
             <br />
 
-            <label for="address"> כתובת: </label>
+            <label htmlFor="address"> כתובת: </label>
             <input
               type="text"
               id="address"
@@ -190,7 +252,7 @@ export function AssistanceProject() {
               required
               className="input1"
             />
-            <label for="phone_number"> נייד: </label>
+            <label htmlFor="phone_number"> נייד: </label>
             <input
               className="input1"
               type="number"
@@ -200,7 +262,7 @@ export function AssistanceProject() {
               value={formData.phone_number}
               onChange={(e) => handleChange(e)}
             />
-            <label for="email"> מייל : </label>
+            <label htmlFor="email"> מייל : </label>
             <input
               className="input1"
               type="email"
@@ -212,177 +274,218 @@ export function AssistanceProject() {
             />
             <br />
             <br />
-          </form>
-        </fieldset>
-        <br />
-        <br />
+          </fieldset>
+          <br />
+          <br />
 
-        <fieldset>
-          <legend class="legendTitle">גורם מפנה</legend>
-          <form>
-            <label for="referrer_name"> שם : </label>
+          <fieldset>
+            <legend id="social" className="legendTitle">
+              גורם מפנה
+            </legend>
+
+            <label htmlFor="referrer_name"> שם : </label>
             <input
               className="input1"
               type="text"
               id="referrer_name"
               name="referrer_name"
-              required
+              required={true}
               value={formData.referrer_name}
               onChange={(e) => handleChange(e)}
             />
-            <label for="referrer_proffesion"> תפקיד : </label>
+            <label htmlFor="referrer_proffesion"> תפקיד : </label>
             <input
               className="input1"
               type="text"
               id="referrer_proffesion"
               name="referrer_proffesion"
-              required
+              required={true}
               value={formData.referrer_proffesion}
               onChange={(e) => handleChange(e)}
             />
-            <label for="referrer_phone"> טלפון : </label>
+            <label htmlFor="referrer_phone"> טלפון : </label>
             <input
               className="input1"
               type="number"
               id="referrer_phone"
               name="referrer_phone"
-              required
+              required={true}
               value={formData.referrer_phone}
               onChange={(e) => handleChange(e)}
             />
-            <label for="referrer_email"> מייל : </label>
+            <label htmlFor="referrer_email"> מייל : </label>
             <input
               className="input1"
               type="email"
               id="referrer_email"
               name="referrer_email"
-              required
+              required={true}
               value={formData.referrer_email}
               onChange={(e) => handleChange(e)}
             />
             <br />
             <br />
-          </form>
-        </fieldset>
-        <br />
-        <br />
+          </fieldset>
+          <br />
+          <br />
 
-        <fieldset>
-          <legend class="legendTitle">לימודים</legend>
-          <label for="framework_name"> מוסד לימודים : </label>
-          <input
-            className="input1"
-            type="text"
-            id="framework_name"
-            name="framework_name"
-            required
-            value={formData.framework_name}
-            onChange={(e) => handleChange(e)}
-          />
-          <label for="framework_field"> תחום לימודים : </label>
-          <input
-            className="input1"
-            type="text"
-            id="framework_field"
-            name="framework_field"
-            required
-            value={formData.framework_field}
-            onChange={(e) => handleChange(e)}
-          />
-          <label for="framework_years"> מספר שנות לימודים : </label>
-          <input
-            className="input1"
-            type="text"
-            id="framework_years"
-            name="framework_years"
-            required
-            value={formData.framework_years}
-            onChange={(e) => handleChange(e)}
-          />
-          <br />
-          <br />
-          <label for="tuition"> היקף שכר לימוד : </label>
-          <input
-            className="input1"
-            type="text"
-            id="tuition"
-            name="tuition"
-            required
-            value={formData.tuition}
-            onChange={(e) => handleChange(e)}
-          />
-          <br />
-          <br />
-          <label for="graduation"> סיום לימודים : </label>
-          <select id="graduation" required className="select1">
-            <option id="full">בגרות מלאה </option>
-            <option id="partial">בגרות חלקית </option>
-          </select>
-          <label for="graduation_details"> פירוט אודות הלימודים : </label>
-          <input
-            className="input1"
-            type="text"
-            id="graduation_details"
-            name="graduation_details"
-            value={formData.graduation_details}
-            onChange={(e) => handleChange(e)}
-          />
+          <fieldset>
+            <legend id="study" className="legendTitle">
+              לימודים
+            </legend>
+            <label htmlFor="framework_name"> מוסד לימודים : </label>
+            <input
+              className="input1"
+              type="text"
+              id="framework_name"
+              name="framework_name"
+              required={true}
+              value={formData.framework_name}
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="framework_field"> תחום לימודים : </label>
+            <input
+              className="input1"
+              type="text"
+              id="framework_field"
+              name="framework_field"
+              required={true}
+              value={formData.framework_field}
+              onChange={(e) => handleChange(e)}
+            />
+            <label htmlFor="framework_years"> מספר שנות לימודים : </label>
+            <input
+              className="input1"
+              type="text"
+              id="framework_years"
+              name="framework_years"
+              required={true}
+              value={formData.framework_years}
+              onChange={(e) => handleChange(e)}
+            />
+            <br />
+            <br />
+            <label htmlFor="tuition"> היקף שכר לימוד : </label>
+            <input
+              className="input1"
+              type="text"
+              id="tuition"
+              name="tuition"
+              required={true}
+              value={formData.tuition}
+              onChange={(e) => handleChange(e)}
+            />
+            <br />
+            <br />
+            <label htmlFor="graduation"> סיום לימודים : </label>
+            <select
+              id="graduation"
+              required
+              className="select1"
+              onChange={(e) => handleSelecetChange(e)}
+            >
+              <option value="" selected disabled hidden>
+                בחר
+              </option>
+              <option id="full" value="בגרות מלאה">
+                בגרות מלאה{" "}
+              </option>
+              <option id="partial" value="בגרות חלקית">
+                בגרות חלקית{" "}
+              </option>
+              <option id="full" value="אחר">
+                אחר{" "}
+              </option>
+            </select>
+            <label htmlFor="graduation_details"> פירוט אודות הלימודים : </label>
+            <input
+              className="input1"
+              type="text"
+              id="graduation_details"
+              name="graduation_details"
+              value={formData.graduation_details}
+              onChange={(e) => handleChange(e)}
+            />
 
+            <br />
+            <br />
+          </fieldset>
           <br />
           <br />
-        </fieldset>
-        <br />
-        <br />
 
-        <fieldset>
-          <legend class="legendTitle">כללי</legend>
-          <label for="other_schilarships">
-            {" "}
-            האם הוגשו בקשות למלגות נוספות :{" "}
-          </label>
-          <select id="other_schilarships" className="select1">
-            <option id="other_schilarships">כן </option>
-            <option id="not_other_schilarships">לא</option>
-          </select>
-          <label for="scholarships_details"> פירוט אודות המלגות : </label>
-          <input
-            className="input1"
-            type="text"
-            id="scholarships_details"
-            name="scholarships_details"
-            value={formData.scholarship_details}
-            onChange={(e) => handleChange(e)}
-          />
-          <br />
-          <br />
-          <label for="insurance_institute_allowance">
-            האם מקבל/ת קצבאות מביטוח לאומי/משרד הביטחון? :{" "}
-          </label>
-          <select id="insurance_institute_allowance" className="select1">
-            <option id="insurance_institute_allowance">כן </option>
-            <option id="not_insurance_institute_allowance">לא</option>
-            <option id="other">אחר</option>
-          </select>
-          <label for="insurance_institute_allowance_details">
-            {" "}
-            פירוט אודות הקצבאות המתקבלות מביטוח לאומי :{" "}
-          </label>
-          <input
-            className="input1"
-            type="text"
-            id="insurance_institute_allowance_details"
-            name="insurance_institute_allowance_details"
-            value={formData.insurance_institute_allowance_details}
-            onChange={(e) => handleChange(e)}
-          />
+          <fieldset>
+            <legend id="general" className="legendTitle">
+              כללי
+            </legend>
+            <label htmlFor="other_schilarships">
+              {" "}
+              האם הוגשו בקשות למלגות נוספות :{" "}
+            </label>
+            <select
+              id="other_schilarships"
+              className="select1"
+              onChange={(e) => handleSelecetChange(e)}
+            >
+              <option value="" selected disabled hidden>
+                בחר
+              </option>
+              <option id="other_schilarships" value="כן">
+                כן{" "}
+              </option>
+              <option id="not_other_schilarships" value="לא">
+                לא
+              </option>
+            </select>
+            <label htmlFor="scholarships_details"> פירוט אודות המלגות : </label>
+            <input
+              className="input1"
+              type="text"
+              id="scholarships_details"
+              name="scholarships_details"
+              value={formData.scholarship_details}
+              onChange={(e) => handleChange(e)}
+            />
+            <br />
+            <br />
+            <label htmlFor="insurance_institute_allowance">
+              האם מקבל/ת קצבאות מביטוח לאומי/משרד הביטחון? :{" "}
+            </label>
+            <select
+              id="insurance_institute_allowance"
+              className="select1"
+              onChange={(e) => handleSelecetChange(e)}
+            >
+              <option value="" selected disabled hidden>
+                בחר
+              </option>
+              <option id="insurance_institute_allowance" value="כן">
+                כן{" "}
+              </option>
+              <option id="not_insurance_institute_allowance" value="לא">
+                לא
+              </option>
+              <option id="other">אחר</option>
+            </select>
+            <label htmlFor="insurance_institute_allowance_details">
+              {" "}
+              פירוט אודות הקצבאות המתקבלות מביטוח לאומי :{" "}
+            </label>
+            <input
+              className="input1"
+              type="text"
+              id="insurance_institute_allowance_details"
+              name="insurance_institute_allowance_details"
+              value={formData.insurance_institute_allowance_details}
+              onChange={(e) => handleChange(e)}
+            />
 
+            <br />
+            <br />
+          </fieldset>
           <br />
           <br />
-        </fieldset>
-        <br />
-        <br />
-
-        <button class="button-55" onClick={docPage}>
+        </form>
+        <button className="button-55" onClick={docPage}>
           {" "}
           הבא
         </button>
